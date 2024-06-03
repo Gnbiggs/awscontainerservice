@@ -1,0 +1,13 @@
+version: 3
+automerge: true
+parallel_apply: true
+parallel_plan: true
+
+projects:
+  - name: project
+    dir: ./project
+    terraform_version: v1.6.3
+    autoplan:
+      when_modified: ["*.tf", "*.tftpl", "../modules/**/*tf"]
+      enabled: true
+    apply_requirements: [mergeable]
