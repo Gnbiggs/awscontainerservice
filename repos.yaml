@@ -1,0 +1,5 @@
+repos:
+- id: /.*/
+  plan_requirements: [approved]
+  apply_requirements: [approved]
+  import_requirements: [approved]
