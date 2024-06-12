@@ -5,7 +5,7 @@ parallel_plan: true
 
 projects:
   - name: project
-    dir: ./project
+    dir: ./project/testing-environment
     terraform_version: v1.6.3
     autoplan:
       when_modified: ["*.tf", "*.tftpl", "../modules/**/*tf"]

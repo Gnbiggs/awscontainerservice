@@ -12,8 +12,21 @@ provider "aws" {
 
 resource "aws_default_vpc" "default" {} # This need to be added since AWS Provider v4.29+ to get VPC id
 
+data "aws_ami" "ubuntu" {
+  most_recent = true
+  filter {
+    name   = "name"
+    values = ["ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-*"]
+  }
+  filter {
+    name   = "virtualization-type"
+    values = ["hvm"]
+  }
+  owners = ["099720109477"] # Canonical
+}
+
 resource "aws_instance" "web" {
-  ami                         = "ami-0c9bfc21ac5bf10eb" // Amazon Linux2
+  ami                         = data.aws_ami.ubuntu.id // Amazon Linux2
   instance_type               = "t3.micro"
   vpc_security_group_ids      = [aws_security_group.web.id]
   user_data_replace_on_change = true   # This need to added!!!! 
